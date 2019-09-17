@@ -1,0 +1,45 @@
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <a class="navbar-brand" href="#">Fixed navbar</a>
+   <!-- <button class="navbar-toggler" type="button" data-toggle="collapse"  (click)="showMenu=!showMenu"  data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  open="true"  open="true">-->
+
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse"  (click)="isCollapsed=!isCollapsed"  data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation"  open="true"  open="true">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+    <!--<div class="collapse navbar-collapse" id="navbarCollapse" [ngClass]="showMenu?:'show':'hide'">-->
+  <div class="collapse navbar-collapse" id="navbarCollapse" [ngbCollapse]="isCollapsed">
+    <ul class="navbar-nav mr-auto"  >
+      <li class="nav-item active">
+        <a class="nav-link" href="#" routerLink=''>Home</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="#" *ngIf="isUserLOggedIn" routerLink='users'>USERS</a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link" *ngIf="isUserLOggedIn" routerLink='/users/new'>  New User</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> -->
+    </ul>
+    <form class="form-inline mt-2 mt-md-0" *ngIf="isUserLOggedIn">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a *ngIf="!isUserLOggedIn" (click)="signIn($event)" class="nav-link" href="#">Login</a>
+        </li>
+        <li class="nav-item text-nowrap">
+          <a *ngIf="!isUserLOggedIn" (click)="signUp($event)" class="nav-link" href="#">Sign up</a>
+        </li>
+        <li *ngIf="isUserLOggedIn" class="nav-link">
+          {{username}}
+        </li>
+        <li class="nav-item text-nowrap">
+          <a *ngIf="isUserLOggedIn" class="nav-link" href="#" (click)="logout($event)">Sign out</a>
+        </li>
+      </ul>
+  </div>
+</nav>
